@@ -9,105 +9,147 @@
 
 namespace raytracer
 {
-
+#define SSAA 1
 Engine::Engine(Scene *scene) : scene(scene)
 {
 	if (scene != nullptr)
 		scene->InitScene();
 }
 
+Engine::~Engine()
+{
+}
+
 void Engine::InitRender()
 {
-	renderHeight = 480 * 4;
-	renderWidth = 640 * 4;
-	focalLength = 0.2;
-	pixelSize = 0.0001;  // or less
-	cameraOrigin = cv::Point3f(0, -1, -5);
-	canvasCenter = cv::Point3f(0, -1, -5 + focalLength);
+	renderHeight = 480 * SSAA;
+	renderWidth = 640 * SSAA;
+	focalLength = 0.2f;
+	pixelSize = 0.0004f / SSAA;  // or less
+	cameraOrigin = cv::Vec3f(0, -1, -5);
+	canvasCenter = cv::Vec3f(0, -1, -5 + focalLength);
 }
 
-Ray *Engine::IndexToRay(int idx)
+Ray Engine::IndexToRay(int idx)
 {
+
 	int y = idx / renderWidth, x = idx % renderWidth;
 
-	cv::Point3f dest = cv::Vec3f(canvasCenter) + cv::Vec3f((x - renderWidth / 2) * pixelSize, (y - renderHeight / 2) * pixelSize, 0);
+	cv::Vec3f dest = canvasCenter + cv::Vec3f((x - renderWidth / 2) * pixelSize, (y - renderHeight / 2) * pixelSize, 0);
 
-	return new Ray(cameraOrigin, dest - cameraOrigin);
+	return Ray(cameraOrigin, dest - cameraOrigin);
 }
 
-cv::Scalar Engine::RayTrace(const Ray &ray)
+Primitive *Engine::Hit(Ray ray, float &dist)
 {
-	float dist = INFINITY;
-	Primitive *hitprim = nullptr;
+	//	Find the hit Primitive
+	Primitive *hit = nullptr;
 	for (int i = 0; i < scene->GetNumPrimitives(); ++i)
 	{
 		Primitive *prim = scene->GetPrimitives(i);
-		if (prim == nullptr) continue;
-		float tdist = INFINITY;
-		if (prim->Intersect(ray, tdist) == raytracer::HIT)
+
+		float t_dist = INFINITY;
+		if (prim->Intersect(ray, t_dist) == raytracer::HIT)
 		{
-			if (tdist < dist)
+			if (t_dist < dist)
 			{
-				dist = tdist;
-				hitprim = prim;
+				dist = t_dist;
+				hit = prim;
 			}
 		}
-
 	}
-	if (hitprim != nullptr)
+	return hit;
+}
+
+cv::Scalar Engine::RayTrace(Ray ray, int depth)
+{
+	if (depth > 3)
 	{
-		if (hitprim->IsLight())
-			return cv::Scalar(255, 255, 255);
+		return DEFAULT_COLOR;
+	}
+
+	float dist = INFINITY;
+	Primitive *hit = Hit(ray, dist);
+
+//	If hit something
+	if (hit != nullptr)
+	{
+		if (hit->IsLight())
+		{
+			return hit->GetColor();
+		}
 		else
 		{
-			cv::Scalar color;
-			cv::Point3f point = (cv::Vec3f)ray.GetOrigin() + dist * ray.GetDirection();
-			cv::Vec3f N = hitprim->GetNormal(point);
+			cv::Scalar color = DEFAULT_COLOR;
+
+			cv::Vec3f point = ray.GetOrigin() + dist * ray.GetDirection();
+
+//			Normal vector, view vector
+			cv::Vec3f N = hit->GetNormal(point), V = -ray.GetDirection();
+
 			for (int i = 0; i < scene->GetNumPrimitives(); i++)
 			{
 				Primitive *light = scene->GetPrimitives(i);
-				if (light == nullptr) continue;
+				cv::Scalar I = hit->GetMaterial()->GetColor().mul(light->GetMaterial()->GetColor());
+
 				if (light->IsLight())
 				{
-					cv::Vec3f L = cv::normalize((cv::Vec3f)point - (cv::Vec3f)((Sphere *)light)->GetCenter());
-					if (light->GetMaterial()->GetDiffusion() > 0)
+					cv::Vec3f L = cv::normalize(point - ((Sphere *)light)->GetCenter());
+					if (Hit(Ray(point, -L), dist = INFINITY) != light) continue;
+					double dot = -N.ddot(L);
+					if (dot > 0)
 					{
-						float dot = -L.dot(N);
-						if (dot > 0)
-						{
-							double diff = 10 * dot * light->GetMaterial()->GetDiffusion();
+						cv::Vec3f R = L - 2 * N.dot(L) * N;
 
-							color += diff / 256 * (hitprim->GetMaterial()->GetColor().mul(light->GetMaterial()->GetColor()));
-						}
+//					    Diffusion
+						color += 0.5 * hit->GetMaterial()->GetDiffusion() * -N.ddot(L) * I;
+
+//					    Specular
+						color += 1.0 * hit->GetMaterial()->GetSpecular() * pow(V.dot(R), 30) * I;
+
 					}
+
 				}
 			}
+
+//			Reflection
+			cv::Vec3f VR = 2 * N.dot(V) * N - V;
+			color += 1.0 * hit->GetMaterial()->GetReflection() * hit->GetMaterial()->GetColor().mul(RayTrace(Ray(point, VR), depth + 1));
+
 			return color;
 		}
 	}
 
-	return BACKGROUND_COLOR;
+	return DEFAULT_COLOR;
 }
 
-cv::Mat *Engine::Render()
+cv::Mat Engine::Render()
 {
+	InitRender();
+
+	cv::Mat colorMat(renderHeight, renderWidth, CV_8UC3);
+
 	if (scene != nullptr)
 	{
-		InitRender();
-		cv::Mat *colorMat = new cv::Mat(renderHeight, renderWidth, CV_8UC3);
 
 		for (int idx = 0; idx < renderHeight * renderWidth; ++idx)
 		{
-			Ray *ray = IndexToRay(idx);
-			colorMat->row(idx / renderWidth).col(idx % renderWidth) = RayTrace(*ray);
-			delete ray;
+			Ray &&ray = IndexToRay(idx);
+
+			cv::Scalar &&color = RayTrace(ray) + AMBIENT_COLOR;
+			colorMat.row(idx / renderWidth).col(idx % renderWidth) = 255.0 * color;
 		}
 
-		cv::resize(*colorMat, *colorMat, cv::Size(renderWidth / 4, renderHeight / 4), 0, 0);
-
-		return colorMat;
 	}
-	return nullptr;
+	else
+	{
+		std::cout << "Scene isn't set!" << std::endl;
+	}
+
+	cv::resize(colorMat, colorMat, cv::Size(renderWidth / SSAA, renderHeight / SSAA), 0, 0);
+
+	return colorMat;
+
 }
 
 }

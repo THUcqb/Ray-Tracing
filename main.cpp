@@ -7,9 +7,17 @@ using namespace cv;
 
 int main(int argc, char** argv)
 {
-	raytracer::Engine *engine =  new raytracer::Engine(new raytracer::Scene);
+	raytracer::Scene *scene = new raytracer::Scene;
+	raytracer::Engine *engine = new raytracer::Engine(scene);
 
-	cv::imshow("image", *(engine->Render()));
+	cv::namedWindow("Display Window", WINDOW_AUTOSIZE);
+
+	Mat image = engine->Render();
+	cv::imshow("Display Window", image);
+
+	delete engine;
+
+	delete scene;
 
 	waitKey(0);
 

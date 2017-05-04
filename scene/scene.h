@@ -14,7 +14,6 @@ class Primitive;
 
 class Scene
 {
-#define BACKGROUND_COLOR cv::Scalar(10, 10, 10)
 	Primitive **primitives;
 	int numPrimitives;
 

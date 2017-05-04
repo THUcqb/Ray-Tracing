@@ -4,9 +4,30 @@
 
 #include "components.h"
 #include "../raytracer.h"
+#include <cstring>
 
 namespace raytracer
 {
+
+Primitive::Primitive(const char *id, bool isLight) : isLight(isLight)
+{
+	char *str = new char[strlen(id) + 1];
+	strcpy(str, id);
+	Primitive::id = str;
+}
+
+Primitive::~Primitive()
+{
+	delete id;
+}
+
+void Primitive::SetId(const char *id)
+{
+	delete id;
+	char *str = new char[strlen(id) + 1];
+	strcpy(str, id);
+	Primitive::id = str;
+}
 
 HitState Sphere::Intersect(const Ray &ray, float &dist)
 {
@@ -21,7 +42,7 @@ HitState Sphere::Intersect(const Ray &ray, float &dist)
 		t2 = cv::sqrt(t2);
 		if (l.dot(l) < sqRadius)
 		{
-			if (tp + t2 < dist)
+			if (tp + t2 < dist && tp + t2 > EPSILON)
 			{
 				dist = tp + t2;
 				return INPRIM;
@@ -31,7 +52,7 @@ HitState Sphere::Intersect(const Ray &ray, float &dist)
 		{
 			if (tp > 0)
 			{
-				if (tp - t2< dist)
+				if (tp - t2 < dist && tp - t2 > EPSILON)
 				{
 					dist = tp - t2;
 					return HIT;
@@ -48,7 +69,7 @@ HitState Plane::Intersect(const Ray &ray, float &dist)
 	if (dotproduct != 0)
 	{
 		float tdist = -(normal.dot(ray.GetOrigin()) + D) / dotproduct;
-		if (tdist > 0)
+		if (tdist > EPSILON)
 		{
 			if (tdist < dist)
 			{
@@ -59,6 +80,5 @@ HitState Plane::Intersect(const Ray &ray, float &dist)
 	}
 	return MISS;
 }
-
 
 }

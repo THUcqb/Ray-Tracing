@@ -11,19 +11,20 @@ namespace raytracer
 {
 class Scene;
 
+class Primitive;
+
 class Ray
 {
-	cv::Point3f ori;
-	cv::Vec3f dir;
+	cv::Vec3f ori, dir;
 
 public:
-	Ray(const cv::Point3f &ori = cv::Point3f(0, 0, 0), const cv::Vec3f &dir = cv::Point3f(0, 0, 0)) : ori(ori), dir(normalize(dir)) {}
+	Ray(const cv::Vec3f &ori = cv::Vec3f(0, 0, 0), const cv::Vec3f &dir = cv::Vec3f(0, 0, 0)) : ori(ori), dir(normalize(dir)) {}
 
-//	void SetOrigin(const cv::Point3f& cori) { ori = cori; }
+//	void SetOrigin(const cv::Vec3f& cori) { ori = cori; }
 
 //	void SetDirection(const cv::Vec3f& cdir) { dir = normalize(cdir); }
 
-	const cv::Point3f& GetOrigin() const { return ori; }
+	const cv::Vec3f& GetOrigin() const { return ori; }
 
 	const cv::Vec3f& GetDirection() const { return dir; }
 };
@@ -34,17 +35,22 @@ private:
 	Scene *scene;
 	int renderWidth, renderHeight;
 	float focalLength, pixelSize;
-	cv::Point3f cameraOrigin, canvasCenter;
+	cv::Vec3f cameraOrigin, canvasCenter;
 
 	void InitRender();
 
-	cv::Scalar RayTrace(const Ray &ray);
+	Ray IndexToRay(int index);
 
-	Ray *IndexToRay(int index);
+	cv::Scalar RayTrace(Ray ray, int depth = 0);
+
+	Primitive *Hit(Ray ray, float &dist);
+
 public:
 	Engine(Scene *scene);
 
-	cv::Mat *Render();
+	virtual ~Engine();
+
+	cv::Mat Render();
 };
 
 }   // namespace raytracer
