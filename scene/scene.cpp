@@ -55,7 +55,7 @@ void Scene::InitScene()
 	// front plane
 	primitives[4] = new Plane(cv::Vec3f(0, 0, -1), 12, "front");
 	primitives[4]->GetMaterial()->SetReflection(0.1);
-	primitives[4]->GetMaterial()->SetDiffusion(0.2);
+	primitives[4]->GetMaterial()->SetDiffusion(0.15);
 	primitives[4]->GetMaterial()->SetColor(cv::Scalar(0.81,0.90,0.96));
 
 	// back plane
@@ -81,16 +81,16 @@ void Scene::InitScene()
 	primitives[7]->GetMaterial()->SetColor(cv::Scalar( 0.5, 0.15, 0.08 ));
 
 	// light source 1
-	primitives[8] = new Sphere( cv::Vec3f(2, -3.8f, 6), 0.1f , "light1", true);
+	primitives[8] = new Sphere( cv::Vec3f(2, -3.8f, 5), 0.1f , "light1", true);
 	primitives[8]->GetMaterial()->SetColor(cv::Scalar( 1, 1, 1));
 	// light source 2
-	primitives[9] = new Sphere( cv::Vec3f(2, -3.8f, 2), 0.1f , "light2", true);
+	primitives[9] = new Sphere( cv::Vec3f(2, -3.8f, 1), 0.1f , "light2", true);
 	primitives[9]->GetMaterial()->SetColor(cv::Scalar( 1, 1, 1));
 
-	primitives[10] = new Sphere( cv::Vec3f(-2, -3.8f, 6), 0.1f , "light3", true);
+	primitives[10] = new Sphere( cv::Vec3f(-2, -3.8f, 5), 0.1f , "light3", true);
 	primitives[10]->GetMaterial()->SetColor(cv::Scalar( 1, 1, 1));
 
-	primitives[11] = new Sphere( cv::Vec3f(-2, -3.8f, 2), 0.1f , "light4", true);
+	primitives[11] = new Sphere( cv::Vec3f(-2, -3.8f, 1), 0.1f , "light4", true);
 	primitives[11]->GetMaterial()->SetColor(cv::Scalar( 1, 1, 1));
 
 }
