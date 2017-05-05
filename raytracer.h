@@ -47,7 +47,11 @@ private:
 
 	float ρ(float θ, float φ);
 
+	cv::Vec3f RandDir();
+
 	cv::Scalar RayTrace(Ray ray, int depth = 0);
+
+	cv::Scalar LocalIllumination(Ray ray);
 
 	Primitive *Hit(Ray ray, float &dist);
 
