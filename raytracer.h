@@ -41,6 +41,12 @@ private:
 
 	Ray IndexToRay(int index);
 
+	float D(float alpha, float roughness);
+
+	float G(cv::Vec3f L, cv::Vec3f N, cv::Vec3f H, cv::Vec3f V);
+
+	float ρ(float θ, float φ);
+
 	cv::Scalar RayTrace(Ray ray, int depth = 0);
 
 	Primitive *Hit(Ray ray, float &dist);

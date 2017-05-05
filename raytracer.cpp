@@ -2,14 +2,13 @@
 // Created by 陈齐斌 on 04/05/2017.
 //
 
-#include <cv.h>
 #include "raytracer.h"
 #include "scene/scene.h"
 #include "scene/components.h"
 
 namespace raytracer
 {
-#define SSAA 1
+#define SSAA 4
 Engine::Engine(Scene *scene) : scene(scene)
 {
 	if (scene != nullptr)
@@ -24,10 +23,10 @@ void Engine::InitRender()
 {
 	renderHeight = 480 * SSAA;
 	renderWidth = 640 * SSAA;
-	focalLength = 0.2f;
+	focalLength = 0.18f;
 	pixelSize = 0.0004f / SSAA;  // or less
-	cameraOrigin = cv::Vec3f(0, -1, -5);
-	canvasCenter = cv::Vec3f(0, -1, -5 + focalLength);
+	cameraOrigin = cv::Vec3f(0, 0, -8);
+	canvasCenter = cv::Vec3f(0, 0, -8 + focalLength);
 }
 
 Ray Engine::IndexToRay(int idx)
@@ -59,6 +58,27 @@ Primitive *Engine::Hit(Ray ray, float &dist)
 		}
 	}
 	return hit;
+}
+
+float Engine::D(float alpha, float roughness)
+{
+//	Berkmann Distribution function
+
+	return powf((float) M_E, -powf(tanf(alpha), 2) / powf(roughness, 2)) / (powf(roughness, 2) * cosf(alpha));
+}
+
+float Engine::G(cv::Vec3f L, cv::Vec3f N, cv::Vec3f H, cv::Vec3f V)
+{
+//	Attenuation factor
+	return fminf(1, 2 * N.dot(H) / V.dot(H) * fminf(N.dot(V), N.dot(-L)));
+}
+
+float Engine::ρ(float θ, float φ)
+{
+//	std::cout << φ << std::endl;
+
+	return 0.5f * (powf(tanf(θ - φ), 2) / powf(tanf(θ + φ), 2)
+	               + powf(sinf(θ - φ), 2) / powf(sinf(θ + φ), 2));
 }
 
 cv::Scalar Engine::RayTrace(Ray ray, int depth)
@@ -100,12 +120,18 @@ cv::Scalar Engine::RayTrace(Ray ray, int depth)
 					if (dot > 0)
 					{
 						cv::Vec3f R = L - 2 * N.dot(L) * N;
+						cv::Vec3f H = cv::normalize(V - L);
 
-//					    Diffusion
-						color += 0.5 * hit->GetMaterial()->GetDiffusion() * -N.ddot(L) * I;
+						float alpha = acosf(N.dot(H));
+						float θ = acosf(-L.dot(N)), φ = asinf(sinf(θ) / hit->GetMaterial()->GetN());
+//					    Diffusion = Ii * (N.dot(-L)) * Kd * Rd;
+						color += I * hit->GetMaterial()->GetDiffusion() * -N.ddot(L);
 
-//					    Specular
-						color += 1.0 * hit->GetMaterial()->GetSpecular() * pow(V.dot(R), 30) * I;
+//						Cook - Torrance
+//						Specular = Ii * (N.dot(-L)) * Ks * Rs, Rs = D(⍺, roughness) * G * ρ(θ, ƛ) / (M_PI * N.dot(-L) * N.dot(V))
+						color += I * hit->GetMaterial()->GetSpecular()
+						         * D(alpha, hit->GetMaterial()->GetRoughness())
+						         * G(L, N, H, V) * ρ(θ, φ) / (M_PI * N.dot(V));
 
 					}
 
