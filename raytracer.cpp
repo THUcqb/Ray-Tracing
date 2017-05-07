@@ -58,6 +58,7 @@ Primitive *Engine::Hit(Ray ray, float &dist)
 			}
 		}
 	}
+
 	return hit;
 }
 
@@ -108,7 +109,7 @@ cv::Scalar Engine::LocalIllumination(Ray ray)
 			{
 				cv::Vec3f L = cv::normalize(point - ((Sphere *)light)->GetCenter());
 //				Shadow
-				if (Hit(Ray(point, -L), dist = INFINITY) != light) continue;
+//				if (Hit(Ray(point, -L), dist = INFINITY) != light) continue;
 
 				double dot = -N.ddot(L);
 				if (dot > 0)
@@ -147,8 +148,9 @@ cv::Vec3f Engine::RandDir()
 
 cv::Scalar Engine::RayTrace(Ray ray, int depth)
 {
-	if (depth > 2)
+	if (depth > 0)
 	{
+//		return DEFAULT_COLOR;
 		return LocalIllumination(ray);
 	}
 
@@ -171,31 +173,22 @@ cv::Scalar Engine::RayTrace(Ray ray, int depth)
 //			Normal vector, view vector
 			cv::Vec3f N = hit->GetNormal(point), V = -ray.GetDirection();
 
-			cv::Vec3f VR = 2 * N.dot(V) * N - V;
-			cv::Scalar reflection = RayTrace(VR, depth + 1);
+//			cv::Vec3f VR = 2 * N.dot(V) * N - V;
+//			cv::Scalar reflection = RayTrace(Ray(point, VR), depth + 1);
 
-			float diff = RAND_MAX * hit->GetMaterial()->GetDiffusion(), refl = diff + RAND_MAX * hit->GetMaterial()->GetReflection();
+//			float diff = RAND_MAX * hit->GetMaterial()->GetDiffusion(), refl = diff + RAND_MAX * hit->GetMaterial()->GetReflection();
 
-#define MONTE_CARLO_TEST 100
+#define MONTE_CARLO_TEST 30
 			for (int test = 0; test < MONTE_CARLO_TEST; test++)
 			{
-				int &&bet = rand();
-				if (bet < diff)
+				cv::Vec3f randDir = RandDir();
+				float &&dot = N.dot(randDir);
+				if (dot < 0)
 				{
-					cv::Vec3f randDir = RandDir();
-					float &&dot = N.dot(randDir);
-					if (dot < 0)
-					{
-						randDir = randDir - 2 * dot * N;
-						dot = -dot;
-					}
-					color += RayTrace(Ray(point, randDir), depth + 1) * dot;
+					randDir = randDir - 2 * dot * N;
+					dot = -dot;
 				}
-				else
-				if (bet < refl)
-				{
-					color += reflection;
-				}
+				color += RayTrace(Ray(point, randDir), depth + 1) * dot;
 			}
 
 			color /= MONTE_CARLO_TEST;
@@ -224,7 +217,7 @@ cv::Mat Engine::Render()
 
 			cv::Scalar &&color = RayTrace(ray) + AMBIENT_COLOR;
 			colorMat.row(idx / renderWidth).col(idx % renderWidth) = 255.0 * color;
-//		std::cout << color << std::endl;
+std::cout << idx << std::endl;
 
 		}
 

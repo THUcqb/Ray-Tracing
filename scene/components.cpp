@@ -2,32 +2,13 @@
 // Created by 陈齐斌 on 04/05/2017.
 //
 
-#include "components.h"
 #include "../raytracer.h"
-#include <cstring>
+#include "components.h"
+#include "scene.h"
 
 namespace raytracer
 {
-
-Primitive::Primitive(const char *id, bool isLight) : isLight(isLight)
-{
-	char *str = new char[strlen(id) + 1];
-	strcpy(str, id);
-	Primitive::id = str;
-}
-
-Primitive::~Primitive()
-{
-	delete id;
-}
-
-void Primitive::SetId(const char *id)
-{
-	delete id;
-	char *str = new char[strlen(id) + 1];
-	strcpy(str, id);
-	Primitive::id = str;
-}
+#define EPSILON 1e-4
 
 HitState Sphere::Intersect(const Ray &ray, float &dist)
 {

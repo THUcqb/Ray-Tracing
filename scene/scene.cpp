@@ -8,6 +8,26 @@
 namespace raytracer
 {
 
+Primitive::Primitive(const char *id, bool isLight) : isLight(isLight)
+{
+	char *str = new char[strlen(id) + 1];
+	strcpy(str, id);
+	Primitive::id = str;
+}
+
+Primitive::~Primitive()
+{
+	delete id;
+}
+
+void Primitive::SetId(const char *id)
+{
+	delete id;
+	char *str = new char[strlen(id) + 1];
+	strcpy(str, id);
+	Primitive::id = str;
+}
+
 Scene::Scene() : numPrimitives(0), primitives(nullptr)
 {}
 
@@ -49,12 +69,12 @@ void Scene::InitScene()
 	primitives[4]->GetMaterial()->SetColor(cv::Scalar(0.81,0.90,0.96));
 
 	// back plane
-	primitives[5] = new Plane(cv::Vec3f(0, 0, 1), 12, "back");
+	primitives[5] = new Plane(cv::Vec3f(0, 0, 1), 8, "back");
 	primitives[5]->GetMaterial()->SetColor(cv::Scalar(0.81,0.90,0.96));
 
 	for (int i = 0; i < 6; i++)
 	{
-		primitives[5]->GetMaterial()->SetDiffusion(0.8);
+		primitives[i]->GetMaterial()->SetDiffusion(0.3);
 //		primitives[i]->GetMaterial()->SetReflection(0.1);
 	}
 
