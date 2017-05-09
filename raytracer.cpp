@@ -32,7 +32,6 @@ void Engine::InitRender()
 
 Ray Engine::IndexToRay(int idx)
 {
-
 	int y = idx / renderWidth, x = idx % renderWidth;
 
 	cv::Vec3f dest = canvasCenter + cv::Vec3f((x - renderWidth / 2) * pixelSize, (y - renderHeight / 2) * pixelSize, 0);
@@ -61,7 +60,7 @@ Primitive *Engine::Hit(Ray ray, float &dist)
 
 	return hit;
 }
-
+/*
 float Engine::D(float alpha, float roughness)
 {
 //	Berkmann Distribution function
@@ -81,7 +80,7 @@ float Engine::ρ(float θ, float φ)
 	               + powf(sinf(θ - φ), 2) / powf(sinf(θ + φ), 2));
 }
 
-cv::Scalar Engine::LocalIllumination(Ray ray)
+Radiance Engine::LocalIllumination(Ray ray)
 {
 	float dist = INFINITY;
 	Primitive *hit = Hit(ray, dist);
@@ -89,11 +88,11 @@ cv::Scalar Engine::LocalIllumination(Ray ray)
 	//	If hit something
 	if (hit != nullptr)
 	{
-		if (hit->IsLight())
+		if (hit->IsLuminaire())
 		{
 			return hit->GetColor();
 		}
-		cv::Scalar color = DEFAULT_COLOR;
+		Radiance color = DEFAULT_RADIANCE;
 
 		cv::Vec3f point = ray.GetOrigin() + dist * ray.GetDirection();
 
@@ -103,9 +102,9 @@ cv::Scalar Engine::LocalIllumination(Ray ray)
 		for (int i = 0; i < scene->GetNumPrimitives(); i++)
 		{
 			Primitive *light = scene->GetPrimitives(i);
-			cv::Scalar I = hit->GetMaterial()->GetColor().mul(light->GetMaterial()->GetColor());
+			Radiance I = hit->GetMaterial()->GetColor().mul(light->GetMaterial()->GetColor());
 
-			if (light->IsLight())
+			if (light->IsLuminaire())
 			{
 				cv::Vec3f L = cv::normalize(point - ((Sphere *)light)->GetCenter());
 //				Shadow
@@ -135,71 +134,97 @@ cv::Scalar Engine::LocalIllumination(Ray ray)
 		}
 		return color;
 	}
-	return DEFAULT_COLOR;
+	return DEFAULT_RADIANCE;
 }
-
+*/
+/*
 cv::Vec3f Engine::RandDir()
 {
 	float &&theta = (float) (2 * M_PI * rand() / RAND_MAX), &&phi = (float) (M_PI * rand() / RAND_MAX);
-	float &&cos_phi = cosf(phi);
+	float &&sin_phi = sinf(phi);
 
-	return cv::Vec3f(cos_phi * cosf(theta), cos_phi * sinf(theta), sinf(phi));
+	return cv::Vec3f(sin_phi * cosf(theta), sin_phi * sinf(theta), cosf(phi));
 }
+*/
 
-cv::Scalar Engine::RayTrace(Ray ray, int depth)
+Radiance Engine::RayTrace(Ray ray, int depth)
 {
 	if (depth > 0)
-	{
-//		return DEFAULT_COLOR;
-		return LocalIllumination(ray);
-	}
+		return DEFAULT_RADIANCE;
 
 	float dist = INFINITY;
-	Primitive *hit = Hit(ray, dist);
+	Primitive *surface = Hit(ray, dist);
 
-//	If hit something
-	if (hit != nullptr)
+	if (surface != nullptr)
 	{
-		if (hit->IsLight())
-		{
-			return hit->GetColor();
-		}
-		else
-		{
-			cv::Scalar color = DEFAULT_COLOR;
+		cv::Vec3f surfacePoint = ray.GetOrigin() + dist * ray.GetDirection();
+		cv::Vec3f surfaceNormal = surface->GetNormal(surfacePoint);
+//			cv::Vec3f view = -ray.GetDirection();
 
-			cv::Vec3f point = ray.GetOrigin() + dist * ray.GetDirection();
+//		Radiance / Color
+		Radiance radiance = DEFAULT_RADIANCE;
+
+		Primitive *luminaire;
+		for (int i = 0; i < scene->GetNumPrimitives(); i++)
+		{
+			if ((luminaire = scene->GetPrimitives(i))->IsLuminaire() && luminaire->GetType() == Primitive::SPHERE && luminaire != surface)
+			{
+				#define MONTE_CARLO_TEST 100
+				for (int test = 0; test < MONTE_CARLO_TEST; ++test)
+				{
+					cv::Vec3f luminairePoint = ((Sphere*)luminaire)->GetRandomPoint();
+					cv::Vec3f luminaireNormal = luminaire->GetNormal(luminairePoint);
+					cv::Vec3f omega = cv::normalize(surfacePoint - luminairePoint);
+
+					dist = INFINITY;
+//					if the points x and x' can 'see' each other
+					if (surfaceNormal.dot(omega) < 0 && luminaireNormal.dot(omega) > 0 && Hit(Ray(surfacePoint, -omega), dist) == luminaire)
+					{
+						radiance += surface->GetReflectance(surfacePoint, omega) / M_PI
+									* luminaire->GetMaterial()->GetColor()
+									* surfaceNormal.dot(-omega) // cos<n, ⍵>
+									* luminaireNormal.dot(omega)// cos<n', ⍵>
+									/ ((Sphere*)luminaire)->Getpdf(luminairePoint, surfacePoint)
+									/ cv::norm(luminairePoint - surfacePoint, cv::NORM_L2SQR);
+
+					}
+
+//					radiance +=
+				}
+			}
+		}
 
 //			Normal vector, view vector
-			cv::Vec3f N = hit->GetNormal(point), V = -ray.GetDirection();
 
 //			cv::Vec3f VR = 2 * N.dot(V) * N - V;
-//			cv::Scalar reflection = RayTrace(Ray(point, VR), depth + 1);
+//			Radiance reflection = RayTrace(Ray(point, VR), depth + 1);
 
 //			float diff = RAND_MAX * hit->GetMaterial()->GetDiffusion(), refl = diff + RAND_MAX * hit->GetMaterial()->GetReflection();
-
-#define MONTE_CARLO_TEST 30
-			for (int test = 0; test < MONTE_CARLO_TEST; test++)
+/*
+		for (int test = 0; test < MONTE_CARLO_TEST; test++)
+		{
+			cv::Vec3f randDir = RandDir();
+			float &&dot = N.dot(randDir);
+			if (dot < 0)
 			{
-				cv::Vec3f randDir = RandDir();
-				float &&dot = N.dot(randDir);
-				if (dot < 0)
-				{
-					randDir = randDir - 2 * dot * N;
-					dot = -dot;
-				}
-				color += RayTrace(Ray(point, randDir), depth + 1) * dot;
+				randDir = randDir - 2 * dot * N;
+				dot = -dot;
 			}
-
-			color /= MONTE_CARLO_TEST;
-
-			color = color.mul(hit->GetMaterial()->GetColor());
-
-			return color;
+			radiance += RayTrace(Ray(point, randDir), depth + 1) * dot;
 		}
+*/
+		radiance /= MONTE_CARLO_TEST;
+
+		if (surface->IsLuminaire())
+			radiance += surface->GetMaterial()->GetColor() / 200;
+		else
+			radiance = radiance.mul(surface->GetMaterial()->GetColor()) / 255;
+//		std::cout << radiance << std::endl;
+
+		return radiance;
 	}
 
-	return DEFAULT_COLOR;
+	return DEFAULT_RADIANCE;
 }
 
 cv::Mat Engine::Render()
@@ -215,9 +240,9 @@ cv::Mat Engine::Render()
 		{
 			Ray &&ray = IndexToRay(idx);
 
-			cv::Scalar &&color = RayTrace(ray) + AMBIENT_COLOR;
-			colorMat.row(idx / renderWidth).col(idx % renderWidth) = 255.0 * color;
-std::cout << idx << std::endl;
+			Radiance &&radiance = RayTrace(ray) + AMBIENT_RADIANCE;
+			colorMat.row(idx / renderWidth).col(idx % renderWidth) = radiance;
+			std::cout << idx << std::endl;
 
 		}
 
@@ -232,5 +257,6 @@ std::cout << idx << std::endl;
 	return colorMat;
 
 }
+
 
 }

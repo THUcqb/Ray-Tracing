@@ -17,11 +17,18 @@ class Sphere : public Primitive
 private:
 	cv::Vec3f center;
 	float sqRadius, radius;
-
+	int *randlist;
+	int tt;
 public:
 	Sphere(const cv::Vec3f& center, float radius, const char *id, bool light = false) :
 			Primitive(id, light), center(center), radius(radius),
-			sqRadius(radius * radius) {}
+			sqRadius(radius * radius) {
+		randlist = new int[300];
+		srand((unsigned int) time(0));
+		for (int i = 0; i < 300; ++i)
+			randlist[i] = rand() - RAND_MAX / 2;
+		tt = -3;
+	}
 
 	const cv::Vec3f &GetCenter() const { return center; }
 
@@ -29,7 +36,16 @@ public:
 
 	HitState Intersect(const Ray& ray, float& dist) override;
 
-	cv::Vec3f GetNormal(cv::Vec3f point) override { return cv::normalize(point - center); }
+	cv::Vec3f GetNormal(const cv::Vec3f &point) override { return cv::normalize(point - center); }
+
+	float GetReflectance(const cv::Vec3f &point, const cv::Vec3f &omega) override
+	{
+		return material.GetDiffusion();
+	};
+
+	float Getpdf(const cv::Vec3f &luminairePoint, const cv::Vec3f surfacePoint);
+
+	cv::Vec3f GetRandomPoint();
 };
 
 class Plane : public Primitive
@@ -45,7 +61,12 @@ public:
 
 	HitState Intersect(const Ray &ray, float &dist) override;
 
-	cv::Vec3f GetNormal(cv::Vec3f point) override { return cv::normalize(normal); }
+	cv::Vec3f GetNormal(const cv::Vec3f &point) override { return normal; }
+
+	float GetReflectance(const cv::Vec3f &point, const cv::Vec3f &omega) override
+	{
+		return material.GetDiffusion();
+	}
 };
 
 }   //  namespace raytracer

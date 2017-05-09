@@ -9,6 +9,8 @@
 
 namespace raytracer
 {
+typedef cv::Scalar_<int > Radiance;
+
 class Scene;
 
 class Primitive;
@@ -41,17 +43,17 @@ private:
 
 	Ray IndexToRay(int index);
 
+	/*
 	float D(float alpha, float roughness);
 
 	float G(cv::Vec3f L, cv::Vec3f N, cv::Vec3f H, cv::Vec3f V);
 
 	float ρ(float θ, float φ);
 
-	cv::Vec3f RandDir();
+	Radiance LocalIllumination(Ray ray);
+	*/
 
-	cv::Scalar RayTrace(Ray ray, int depth = 0);
-
-	cv::Scalar LocalIllumination(Ray ray);
+	Radiance RayTrace(Ray ray, int depth = 0);
 
 	Primitive *Hit(Ray ray, float &dist);
 

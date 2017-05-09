@@ -44,6 +44,21 @@ HitState Sphere::Intersect(const Ray &ray, float &dist)
 	return MISS;
 }
 
+float Sphere::Getpdf(const cv::Vec3f &luminairePoint, const cv::Vec3f surfacePoint)
+{
+	cv::Vec3f omega = cv::normalize(surfacePoint - luminairePoint);
+
+	return (float) (cosf(omega.dot(GetNormal(luminairePoint))) / 2 / M_PI
+	                / cv::norm(surfacePoint - luminairePoint, cv::NORM_L2SQR))
+					/ (1 - sqrtf((float) (1 - sqRadius / cv::norm(surfacePoint - center, cv::NORM_L2SQR))));
+}
+
+cv::Vec3f Sphere::GetRandomPoint()
+{
+	tt = (tt + 3) % 300;
+	return center + radius * cv::normalize(cv::Vec3f(randlist[tt], randlist[tt+1], randlist[tt+2]));
+}
+
 HitState Plane::Intersect(const Ray &ray, float &dist)
 {
 	float dotproduct = normal.dot(ray.GetDirection());

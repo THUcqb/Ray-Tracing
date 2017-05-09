@@ -9,9 +9,11 @@
 
 namespace raytracer
 {
-#define AMBIENT_COLOR cv::Scalar(0.04, 0.04, 0.04)
-#define LIGHT_COLOR cv::Scalar(1, 1, 1)
-#define DEFAULT_COLOR cv::Scalar(0, 0, 0)
+#define AMBIENT_RADIANCE Radiance(10, 10, 10)
+#define LIGHT_RADIANCE Radiance(50000, 50000, 50000)
+#define DEFAULT_RADIANCE Radiance(0, 0, 0)
+
+typedef cv::Scalar_<int > Radiance;
 
 class Ray;
 
@@ -30,27 +32,28 @@ class Material
 #define DEFAULT_ROUGHNESS 1.2
 
 private:
-	cv::Scalar color;
+	Radiance color;
 	float reflection, diffusion, n, roughness;
 public:
-	Material(const cv::Scalar &color = DEFAULT_COLOR, float reflection = DEFAULT_REFLECTION, float diffusion = DEFAULT_DIFFUSION, float n = DEFAULT_REFRACTIVE_INDEX, float roughness = DEFAULT_ROUGHNESS) :
+	Material(const Radiance &color = DEFAULT_RADIANCE, float reflection = DEFAULT_REFLECTION, float diffusion = DEFAULT_DIFFUSION, float n = DEFAULT_REFRACTIVE_INDEX, float roughness = DEFAULT_ROUGHNESS) :
 			color(color), reflection(reflection), diffusion(diffusion), n(n), roughness(roughness) {}
 
 //	Getter
-	const cv::Scalar &GetColor() const { return color; }
-
-	const float &GetReflection() const { return reflection; }
+	const Radiance &GetColor() const { return color; }
 
 	const float &GetDiffusion() const { return diffusion; }
 
-	float GetSpecular() { return 1.0f - diffusion; }
+//	float GetSpecular() { return 1.0f - diffusion; }
 
+//	const float &GetReflection() const { return reflection; }
+
+/*
 	float GetN() const { return n; }
 
 	float GetRoughness() const { return roughness; }
-
+*/
 //	Setter
-	void SetColor(const cv::Scalar &color) { Material::color = color; }
+	void SetColor(const Radiance &color) { Material::color = color; }
 
 	void SetReflection(float reflection) { Material::reflection = reflection; }
 
@@ -64,9 +67,11 @@ public:
 class Primitive
 {
 private:
-	Material material;
 	const char* id;
-	bool isLight;
+	bool isLuminaire;
+
+protected:
+	Material material;
 
 public:
 	enum Type
@@ -75,7 +80,7 @@ public:
 		SPHERE
 	};
 
-	Primitive(const char *id, bool isLight = false);
+	Primitive(const char *id, bool isLuminaire = false);
 
 	virtual ~Primitive();
 
@@ -84,10 +89,10 @@ public:
 
 	const char *GetId() const { return id; }
 
-	bool IsLight() const { return isLight; }
+	bool IsLuminaire() const { return isLuminaire; }
 
 //	Setter
-	void SetMaterial(const Material &material) { Primitive::material = material; }
+//	void SetMaterial(const Material &material) { Primitive::material = material; }
 
 	void SetId(const char *id);
 
@@ -96,11 +101,13 @@ public:
 //	Interface
 	virtual Type GetType() = 0;
 
+	virtual cv::Vec3f GetNormal(const cv::Vec3f &point) = 0;
+
 	virtual HitState Intersect(const Ray& ray, float& dist) = 0;
 
-	virtual cv::Vec3f GetNormal(cv::Vec3f point) = 0;
+	virtual float GetReflectance(const cv::Vec3f &point, const cv::Vec3f &omega) = 0;
 
-	virtual const cv::Scalar &GetColor() { return material.GetColor(); }
+	virtual const Radiance &GetColor() { return material.GetColor(); }
 };
 
 class Scene
