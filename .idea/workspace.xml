@@ -12,14 +12,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="04df3c3f-886c-4005-8514-942fb758418e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/cqb.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/brdf/BRDF.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/brdf/CookTorranceBRDF.cpp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/brdf/CookTorranceBRDF.h" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/scene/components.cpp" afterPath="$PROJECT_DIR$/components.cpp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/scene/components.h" afterPath="$PROJECT_DIR$/components.h" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/scene/scene.cpp" afterPath="$PROJECT_DIR$/scene.cpp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/scene/scene.h" afterPath="$PROJECT_DIR$/scene.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeLists.txt" afterPath="$PROJECT_DIR$/CMakeLists.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.cpp" afterPath="$PROJECT_DIR$/main.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/raytracer.cpp" afterPath="$PROJECT_DIR$/raytracer.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/raytracer.h" afterPath="$PROJECT_DIR$/raytracer.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scene/components.cpp" afterPath="$PROJECT_DIR$/scene/components.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scene/components.h" afterPath="$PROJECT_DIR$/scene/components.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scene/scene.cpp" afterPath="$PROJECT_DIR$/scene/scene.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scene/scene.h" afterPath="$PROJECT_DIR$/scene/scene.h" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,137 +38,84 @@
     <favorites_list name="RayTracing" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.6133909">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="raytracer.cpp" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/raytracer.cpp">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="400">
-                  <caret line="141" column="1" lean-forward="true" selection-start-line="141" selection-start-column="1" selection-end-line="141" selection-end-column="1" />
-                  <folding>
-                    <element signature="e#40#62#0" expanded="true" />
-                    <element signature="e#156#248#0" expanded="false" />
-                    <element signature="e#250#271#0" expanded="false" />
-                    <element signature="e#541#795#0" expanded="false" />
-                    <element signature="e#797#1174#0" expanded="false" />
-                    <element signature="e#1175#3238#0" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="scene.cpp" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/scene/scene.cpp">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="608">
-                  <caret line="99" column="49" lean-forward="true" selection-start-line="99" selection-start-column="49" selection-end-line="99" selection-end-column="49" />
-                  <folding>
-                    <element signature="e#40#58#0" expanded="true" />
-                    <element signature="e#107#271#0" expanded="false" />
-                    <element signature="e#273#312#0" expanded="false" />
-                    <element signature="e#314#446#0" expanded="false" />
-                    <element signature="e#507#684#0" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="components.cpp" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/scene/components.cpp">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="346">
-                  <caret line="57" column="24" lean-forward="false" selection-start-line="57" selection-start-column="24" selection-end-line="57" selection-end-column="24" />
-                  <folding>
-                    <element signature="e#40#65#0" expanded="true" />
-                    <element signature="e#154#658#0" expanded="false" />
-                    <element signature="e#1216#1529#0" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="raytracer.h" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/raytracer.h">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="54">
-                  <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="scene.h" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/scene/scene.h">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-14">
-                  <caret line="71" column="0" lean-forward="true" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
-                  <folding>
-                    <element signature="e#340#378#1" expanded="false" />
-                    <element signature="e#2460#2774#1" expanded="false" />
-                    <element signature="e#2629#2752#0" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="components.h" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/scene/components.h">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="314">
-                  <caret line="25" column="30" lean-forward="false" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
-                  <folding>
-                    <element signature="e#105#134#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="raytracer.cpp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/raytracer.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="351">
+              <caret line="103" column="41" lean-forward="false" selection-start-line="103" selection-start-column="41" selection-end-line="103" selection-end-column="41" />
+              <folding>
+                <element signature="e#40#62#0" expanded="true" />
+                <element signature="e#146#238#0" expanded="false" />
+                <element signature="e#240#261#0" expanded="false" />
+                <element signature="e#561#815#0" expanded="false" />
+                <element signature="e#817#1211#0" expanded="false" />
+                <element signature="e#4370#5217#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="scene.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scene.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="117">
+              <caret line="86" column="31" lean-forward="false" selection-start-line="86" selection-start-column="31" selection-end-line="86" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>V</find>
-      <find>cv::Vec3f</find>
-      <find>scalar</find>
-      <find>random</find>
-      <find>Vec3f</find>
-      <find>re</find>
-      <find>ref</find>
-      <find>reflec</find>
-      <find>reflect</find>
-      <find>reflecti</find>
-      <find>setdi</find>
-      <find>cv::Scalar</find>
-      <find>reflectiv</find>
-      <find>Light</find>
-      <find>Lightra</find>
-      <find>Lightrad</find>
-      <find>Lightradian</find>
-      <find>L</find>
-      <find>LIGHTRADIAN</find>
       <find>LIGHTRADIA</find>
       <find>LIGHTRADI</find>
       <find>LIGHTRAD</find>
       <find>LIGHTRA</find>
       <find>LIGHTR</find>
       <find>LIGHT</find>
-      <find>srand</find>
       <find>LIGHT_</find>
       <find>c</find>
       <find>cv::sc</find>
+      <find>enum</find>
       <find>cv::sca</find>
+      <find>d</find>
+      <find>sran</find>
+      <find>rand()</find>
+      <find>hit</find>
+      <find>reflection</find>
+      <find>sp</find>
+      <find>define</find>
+      <find>l</find>
+      <find>light</find>
+      <find>qu</find>
+      <find>qua</find>
+      <find>r</find>
+      <find>sra</find>
+      <find>srand</find>
+      <find>q</find>
+      <find>quasi</find>
+      <find>lig</find>
+      <find>light_</find>
+      <find>sphere</find>
     </findStrings>
     <replaceStrings>
       <replace>Vec3f</replace>
       <replace>Vector</replace>
       <replace>Radiance</replace>
+      <replace>specular</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -176,12 +127,19 @@
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/Reference/raytracer.cpp" />
         <option value="$PROJECT_DIR$/Reference/scene.cpp" />
-        <option value="$PROJECT_DIR$/main.cpp" />
-        <option value="$PROJECT_DIR$/raytracer.h" />
         <option value="$PROJECT_DIR$/scene/scene.cpp" />
         <option value="$PROJECT_DIR$/scene/scene.h" />
         <option value="$PROJECT_DIR$/scene/components.cpp" />
         <option value="$PROJECT_DIR$/scene/components.h" />
+        <option value="$PROJECT_DIR$/components.cpp" />
+        <option value="$PROJECT_DIR$/components.h" />
+        <option value="$PROJECT_DIR$/scene.h" />
+        <option value="$PROJECT_DIR$/main.cpp" />
+        <option value="$PROJECT_DIR$/brdf/BRDF.h" />
+        <option value="$PROJECT_DIR$/brdf/CookTorranceBRDF.cpp" />
+        <option value="$PROJECT_DIR$/brdf/CookTorranceBRDF.h" />
+        <option value="$PROJECT_DIR$/raytracer.h" />
+        <option value="$PROJECT_DIR$/scene.cpp" />
         <option value="$PROJECT_DIR$/raytracer.cpp" />
       </list>
     </option>
@@ -194,9 +152,9 @@
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="49" />
+    <option name="x" value="53" />
     <option name="y" value="22" />
-    <option name="width" value="1391" />
+    <option name="width" value="1387" />
     <option name="height" value="878" />
   </component>
   <component name="ProjectLevelVcsManager">
@@ -229,14 +187,34 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RayTracing" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$MyProjectTreeStructure$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RayTracing" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brdf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="preferences.general" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="SearchEverywhereHistoryKey" value="mai&#9;FILE&#9;file:///Users/cqb/Developer/RayTracing/main.cpp&#10;sph&#9;null&#9;null&#10;primi&#9;null&#9;null&#10;scene&#9;FILE&#9;file:///Users/cqb/Developer/RayTracing/Reference/scene.cpp&#10;sc&#9;FILE&#9;file:///Users/cqb/Developer/RayTracing/scene/scene.h&#10;scen&#9;FILE&#9;file:///Users/cqb/Developer/RayTracing/scene/scene.h&#10;hit&#9;null&#9;null&#10;main&#9;FILE&#9;file:///Users/cqb/Developer/RayTracing/main.cpp&#10;sce&#9;FILE&#9;file:///Users/cqb/Developer/RayTracing/scene/scene.cpp&#10;initsce&#9;null&#9;null" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/bdrf" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -466,27 +444,27 @@
       <workItem from="1494134652411" duration="203000" />
       <workItem from="1494149454132" duration="863000" />
       <workItem from="1494155679667" duration="1256000" />
-      <workItem from="1494162131737" duration="13516000" />
+      <workItem from="1494162131737" duration="58383000" />
+      <workItem from="1494573330049" duration="4188000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="79157000" />
+    <option name="totallyTimeSpent" value="128212000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="49" y="22" width="1391" height="878" extended-state="6" />
+    <frame x="53" y="22" width="1387" height="878" extended-state="6" />
     <editor active="true" />
     <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15140592" sideWeight="0.49384886" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21260816" sideWeight="0.4968102" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2039555" sideWeight="0.4968102" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2694685" sideWeight="0.5095694" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17552534" sideWeight="0.49043062" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17305315" sideWeight="0.49043062" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32880098" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15277778" sideWeight="0.49384886" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32880098" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39925835" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17777778" sideWeight="0.50615114" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -495,29 +473,9 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32880098" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
-    <layout-to-restore>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27315357" sideWeight="0.4968102" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2694685" sideWeight="0.5095694" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2694685" sideWeight="0.49043062" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32880098" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15347221" sideWeight="0.49384886" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32880098" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39925835" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17827298" sideWeight="0.50615114" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="processedProjectFiles" value="true" />
@@ -530,70 +488,22 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="17" />
+      <option name="time" value="25" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="1" lean-forward="true" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
-          <folding>
-            <element signature="e#0#19#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/raytracer.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="792">
-          <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scene/scene.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scene/components.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="792">
-          <caret line="44" column="29" lean-forward="false" selection-start-line="44" selection-start-column="29" selection-end-line="44" selection-end-column="29" />
-          <folding>
-            <element signature="e#40#65#0" expanded="true" />
-            <element signature="e#154#658#0" expanded="false" />
-            <element signature="e#1216#1529#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scene/components.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="810">
-          <caret line="45" column="17" lean-forward="false" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
-          <folding>
-            <element signature="e#105#134#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/raytracer.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3276">
           <caret line="182" column="23" lean-forward="false" selection-start-line="182" selection-start-column="23" selection-end-line="182" selection-end-column="23" />
           <folding>
             <element signature="e#40#62#0" expanded="true" />
-            <element signature="e#156#248#0" expanded="false" />
-            <element signature="e#250#271#0" expanded="false" />
-            <element signature="e#541#795#0" expanded="false" />
-            <element signature="e#797#1174#0" expanded="false" />
-            <element signature="e#1175#3238#0" expanded="false" />
+            <element signature="e#146#238#0" expanded="false" />
+            <element signature="e#240#261#0" expanded="false" />
+            <element signature="e#561#815#0" expanded="false" />
+            <element signature="e#817#1211#0" expanded="false" />
+            <element signature="e#4370#5217#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -602,23 +512,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="12" column="8" lean-forward="false" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#19#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scene/scene.cpp">
+    <entry file="file://$PROJECT_DIR$/scene.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1008">
           <caret line="56" column="54" lean-forward="false" selection-start-line="56" selection-start-column="54" selection-end-line="56" selection-end-column="54" />
-          <folding>
-            <element signature="e#40#58#0" expanded="true" />
-            <element signature="e#107#271#0" expanded="false" />
-            <element signature="e#273#312#0" expanded="false" />
-            <element signature="e#314#446#0" expanded="false" />
-            <element signature="e#507#684#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -630,33 +532,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scene/scene.h">
+    <entry file="file://$PROJECT_DIR$/scene.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
           <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#416#1398#1" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scene/components.cpp">
+    <entry file="file://$PROJECT_DIR$/components.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="792">
           <caret line="44" column="29" lean-forward="true" selection-start-line="44" selection-start-column="29" selection-end-line="44" selection-end-column="29" />
           <folding>
-            <element signature="e#40#65#0" expanded="true" />
-            <element signature="e#154#658#0" expanded="false" />
-            <element signature="e#1216#1529#0" expanded="false" />
+            <element signature="e#151#655#0" expanded="false" />
+            <element signature="e#657#1051#0" expanded="false" />
+            <marker date="1494553333000" expanded="false" signature="1241:1455" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scene/components.h">
+    <entry file="file://$PROJECT_DIR$/components.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="810">
           <caret line="45" column="17" lean-forward="false" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
-          <folding>
-            <element signature="e#105#134#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -666,26 +568,20 @@
           <caret line="117" column="38" lean-forward="true" selection-start-line="117" selection-start-column="38" selection-end-line="117" selection-end-column="38" />
           <folding>
             <element signature="e#40#62#0" expanded="true" />
-            <element signature="e#156#248#0" expanded="false" />
-            <element signature="e#250#271#0" expanded="false" />
-            <element signature="e#541#795#0" expanded="false" />
-            <element signature="e#797#1174#0" expanded="false" />
-            <element signature="e#1175#3238#0" expanded="false" />
+            <element signature="e#146#238#0" expanded="false" />
+            <element signature="e#240#261#0" expanded="false" />
+            <element signature="e#561#815#0" expanded="false" />
+            <element signature="e#817#1211#0" expanded="false" />
+            <element signature="e#4370#5217#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scene/scene.cpp">
+    <entry file="file://$PROJECT_DIR$/scene.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1116">
           <caret line="62" column="4" lean-forward="true" selection-start-line="62" selection-start-column="4" selection-end-line="62" selection-end-column="4" />
-          <folding>
-            <element signature="e#40#58#0" expanded="true" />
-            <element signature="e#107#271#0" expanded="false" />
-            <element signature="e#273#312#0" expanded="false" />
-            <element signature="e#314#446#0" expanded="false" />
-            <element signature="e#507#684#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -697,21 +593,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scene/scene.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scene/components.h">
+    <entry file="file://$PROJECT_DIR$/scene.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
           <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding>
-            <element signature="e#105#134#0" expanded="true" />
+            <element signature="e#416#1398#1" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -721,11 +617,11 @@
           <caret line="65" column="5" lean-forward="false" selection-start-line="65" selection-start-column="5" selection-end-line="65" selection-end-column="5" />
           <folding>
             <element signature="e#40#62#0" expanded="true" />
-            <element signature="e#156#248#0" expanded="false" />
-            <element signature="e#250#271#0" expanded="false" />
-            <element signature="e#541#795#0" expanded="false" />
-            <element signature="e#797#1174#0" expanded="false" />
-            <element signature="e#1175#3238#0" expanded="false" />
+            <element signature="e#146#238#0" expanded="false" />
+            <element signature="e#240#261#0" expanded="false" />
+            <element signature="e#561#815#0" expanded="false" />
+            <element signature="e#817#1211#0" expanded="false" />
+            <element signature="e#4370#5217#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -734,34 +630,26 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="15" column="33" lean-forward="false" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#19#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scene/scene.cpp">
+    <entry file="file://$PROJECT_DIR$/scene.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
           <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding>
-            <element signature="e#40#58#0" expanded="true" />
-            <element signature="e#107#271#0" expanded="false" />
-            <element signature="e#273#312#0" expanded="false" />
-            <element signature="e#314#446#0" expanded="false" />
-            <element signature="e#507#684#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scene/components.cpp">
+    <entry file="file://$PROJECT_DIR$/components.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="2" lean-forward="false" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="2" />
           <folding>
-            <element signature="e#40#65#0" expanded="true" />
-            <element signature="e#154#658#0" expanded="false" />
-            <element signature="e#1216#1529#0" expanded="false" />
+            <element signature="e#151#655#0" expanded="false" />
+            <element signature="e#657#1051#0" expanded="false" />
+            <marker date="1494553333000" expanded="false" signature="1241:1455" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -774,21 +662,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scene/scene.h">
+    <entry file="file://$PROJECT_DIR$/scene.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
           <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#416#1398#1" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scene/components.h">
+    <entry file="file://$PROJECT_DIR$/components.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1332">
           <caret line="74" column="7" lean-forward="false" selection-start-line="74" selection-start-column="7" selection-end-line="74" selection-end-column="7" />
-          <folding>
-            <element signature="e#105#134#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -798,11 +686,11 @@
           <caret line="109" column="25" lean-forward="true" selection-start-line="109" selection-start-column="25" selection-end-line="109" selection-end-column="25" />
           <folding>
             <element signature="e#40#62#0" expanded="true" />
-            <element signature="e#156#248#0" expanded="false" />
-            <element signature="e#250#271#0" expanded="false" />
-            <element signature="e#541#795#0" expanded="false" />
-            <element signature="e#797#1174#0" expanded="false" />
-            <element signature="e#1175#3238#0" expanded="false" />
+            <element signature="e#146#238#0" expanded="false" />
+            <element signature="e#240#261#0" expanded="false" />
+            <element signature="e#561#815#0" expanded="false" />
+            <element signature="e#817#1211#0" expanded="false" />
+            <element signature="e#4370#5217#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -811,34 +699,26 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="15" column="33" lean-forward="true" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#19#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scene/scene.cpp">
+    <entry file="file://$PROJECT_DIR$/scene.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
           <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding>
-            <element signature="e#40#58#0" expanded="true" />
-            <element signature="e#107#271#0" expanded="false" />
-            <element signature="e#273#312#0" expanded="false" />
-            <element signature="e#314#446#0" expanded="false" />
-            <element signature="e#507#684#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scene/components.cpp">
+    <entry file="file://$PROJECT_DIR$/components.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="2" lean-forward="true" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="2" />
           <folding>
-            <element signature="e#40#65#0" expanded="true" />
-            <element signature="e#154#658#0" expanded="false" />
-            <element signature="e#1216#1529#0" expanded="false" />
+            <element signature="e#151#655#0" expanded="false" />
+            <element signature="e#657#1051#0" expanded="false" />
+            <marker date="1494553333000" expanded="false" signature="1241:1455" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -851,28 +731,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scene/scene.h">
+    <entry file="file://$PROJECT_DIR$/scene.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
           <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scene/components.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1620">
-          <caret line="90" column="29" lean-forward="true" selection-start-line="90" selection-start-column="29" selection-end-line="90" selection-end-column="29" />
           <folding>
-            <element signature="e#105#134#0" expanded="true" />
+            <element signature="e#416#1398#1" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/components.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="1620">
+          <caret line="90" column="29" lean-forward="true" selection-start-line="90" selection-start-column="29" selection-end-line="90" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -954,90 +827,129 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+    <entry file="file://$PROJECT_DIR$/brdf/BRDF.cpp" />
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="12" lean-forward="false" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="62">
+          <caret line="82" column="30" lean-forward="true" selection-start-line="82" selection-start-column="30" selection-end-line="82" selection-end-column="30" />
+          <folding>
+            <element signature="e#151#655#0" expanded="false" />
+            <element signature="e#657#1051#0" expanded="false" />
+            <marker date="1494553333000" expanded="false" signature="1241:1455" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        <state relative-caret-position="54">
+          <caret line="6" column="1" lean-forward="false" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scene.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-22">
+          <caret line="13" column="34" lean-forward="true" selection-start-line="13" selection-start-column="34" selection-end-line="13" selection-end-column="34" />
           <folding>
-            <element signature="e#0#19#0" expanded="false" />
+            <element signature="e#416#1398#1" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="19">
+            <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brdf/BRDF.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="18" column="33" lean-forward="false" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brdf/CookTorranceBRDF.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="503">
+          <caret line="53" column="1" lean-forward="false" selection-start-line="53" selection-start-column="1" selection-end-line="53" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brdf/CookTorranceBRDF.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="514">
+          <caret line="43" column="23" lean-forward="true" selection-start-line="43" selection-start-column="23" selection-end-line="43" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scene.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="117">
+          <caret line="86" column="31" lean-forward="false" selection-start-line="86" selection-start-column="31" selection-end-line="86" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/raytracer.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        <state relative-caret-position="149">
+          <caret line="29" column="12" lean-forward="true" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scene/scene.cpp">
+    <entry file="file://$PROJECT_DIR$/components.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="99" column="49" lean-forward="true" selection-start-line="99" selection-start-column="49" selection-end-line="99" selection-end-column="49" />
-          <folding>
-            <element signature="e#40#58#0" expanded="true" />
-            <element signature="e#107#271#0" expanded="false" />
-            <element signature="e#273#312#0" expanded="false" />
-            <element signature="e#314#446#0" expanded="false" />
-            <element signature="e#507#684#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scene/scene.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-14">
-          <caret line="71" column="0" lean-forward="true" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
-          <folding>
-            <element signature="e#340#378#1" expanded="false" />
-            <element signature="e#2460#2774#1" expanded="false" />
-            <element signature="e#2629#2752#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scene/components.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="57" column="24" lean-forward="false" selection-start-line="57" selection-start-column="24" selection-end-line="57" selection-end-column="24" />
-          <folding>
-            <element signature="e#40#65#0" expanded="true" />
-            <element signature="e#154#658#0" expanded="false" />
-            <element signature="e#1216#1529#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scene/components.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="25" column="30" lean-forward="false" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
-          <folding>
-            <element signature="e#105#134#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="19">
+          <caret line="18" column="4" lean-forward="false" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/raytracer.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="141" column="1" lean-forward="true" selection-start-line="141" selection-start-column="1" selection-end-line="141" selection-end-column="1" />
+        <state relative-caret-position="351">
+          <caret line="103" column="41" lean-forward="false" selection-start-line="103" selection-start-column="41" selection-end-line="103" selection-end-column="41" />
           <folding>
             <element signature="e#40#62#0" expanded="true" />
-            <element signature="e#156#248#0" expanded="false" />
-            <element signature="e#250#271#0" expanded="false" />
-            <element signature="e#541#795#0" expanded="false" />
-            <element signature="e#797#1174#0" expanded="false" />
-            <element signature="e#1175#3238#0" expanded="false" />
+            <element signature="e#146#238#0" expanded="false" />
+            <element signature="e#240#261#0" expanded="false" />
+            <element signature="e#561#815#0" expanded="false" />
+            <element signature="e#817#1211#0" expanded="false" />
+            <element signature="e#4370#5217#0" expanded="false" />
           </folding>
         </state>
       </provider>

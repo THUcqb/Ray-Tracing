@@ -4,7 +4,7 @@ project(RayTracing)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp raytracer.cpp raytracer.h scene/components.cpp scene/components.h scene/scene.cpp scene/scene.h)
+set(SOURCE_FILES main.cpp raytracer.cpp raytracer.h components.cpp components.h scene.cpp scene.h brdf/BRDF.h brdf/CookTorranceBRDF.cpp brdf/CookTorranceBRDF.h)
 
 add_executable(RayTracing ${SOURCE_FILES})
 

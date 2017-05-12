@@ -22,10 +22,6 @@ class Ray
 public:
 	Ray(const cv::Vec3f &ori = cv::Vec3f(0, 0, 0), const cv::Vec3f &dir = cv::Vec3f(0, 0, 0)) : ori(ori), dir(normalize(dir)) {}
 
-//	void SetOrigin(const cv::Vec3f& cori) { ori = cori; }
-
-//	void SetDirection(const cv::Vec3f& cdir) { dir = normalize(cdir); }
-
 	const cv::Vec3f& GetOrigin() const { return ori; }
 
 	const cv::Vec3f& GetDirection() const { return dir; }
@@ -43,20 +39,13 @@ private:
 
 	Ray IndexToRay(int index);
 
-	/*
-	float D(float alpha, float roughness);
-
-	float G(cv::Vec3f L, cv::Vec3f N, cv::Vec3f H, cv::Vec3f V);
-
-	float ρ(float θ, float φ);
-
-	Radiance LocalIllumination(Ray ray);
-	*/
-
-	Radiance RayTrace(Ray ray, int depth = 0);
-
 	Primitive *Hit(Ray ray, float &dist);
 
+	Radiance RayTrace(int depth, Ray ray, float dist, Primitive *surface);
+
+#define MAX_DEPTH 2
+	Radiance map[121][101][201][MAX_DEPTH];
+	bool set[121][101][201][MAX_DEPTH];
 public:
 	Engine(Scene *scene);
 

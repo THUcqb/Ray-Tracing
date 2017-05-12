@@ -1,7 +1,7 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
 #include "raytracer.h"
-#include "scene/scene.h"
+#include "scene.h"
 
 int main(int argc, char** argv)
 {
@@ -14,7 +14,6 @@ int main(int argc, char** argv)
 	cv::imshow("Display Window", image);
 
 	delete engine;
-
 	delete scene;
 
 	cv::waitKey(0);
