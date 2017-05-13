@@ -11,21 +11,11 @@ namespace raytracer
 {
 typedef cv::Scalar_<int > Radiance;
 
+class Ray;
+
 class Scene;
 
 class Primitive;
-
-class Ray
-{
-	cv::Vec3f ori, dir;
-
-public:
-	Ray(const cv::Vec3f &ori = cv::Vec3f(0, 0, 0), const cv::Vec3f &dir = cv::Vec3f(0, 0, 0)) : ori(ori), dir(normalize(dir)) {}
-
-	const cv::Vec3f& GetOrigin() const { return ori; }
-
-	const cv::Vec3f& GetDirection() const { return dir; }
-};
 
 class Engine
 {

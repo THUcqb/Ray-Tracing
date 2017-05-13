@@ -1,7 +1,7 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
-#include "raytracer.h"
-#include "scene.h"
+#include "engine/engine.h"
+#include "scene/scene.h"
 
 int main(int argc, char** argv)
 {

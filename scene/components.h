@@ -6,7 +6,7 @@
 #define RAYTRACING_COMPONENTS_H
 
 #include <opencv2/opencv.hpp>
-#include "raytracer.h"
+#include "../engine/engine.h"
 #include "scene.h"
 namespace raytracer
 {

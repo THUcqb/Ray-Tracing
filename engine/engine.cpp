@@ -2,9 +2,9 @@
 // Created by 陈齐斌 on 04/05/2017.
 //
 
-#include "raytracer.h"
-#include "scene.h"
-#include "components.h"
+#include "engine.h"
+#include "../scene/scene.h"
+#include "../scene/components.h"
 
 namespace raytracer
 {
@@ -124,7 +124,7 @@ Radiance Engine::RayTrace(int depth, Ray ray, float dist, Primitive *surface)
 				cv::Vec3f VR = 2 * surfaceNormal.dot(V) * surfaceNormal - V;
 				dist = INFINITY;
 				luminaire = Hit(Ray(surfacePoint, VR), dist);
-				radiance += surface->GetReflection() * RayTrace(depth + 1, Ray(surfacePoint, VR), dist, luminaire);
+				radiance += surface->GetReflection() * RayTrace(depth, Ray(surfacePoint, VR), dist, luminaire);
 			}
 
 			radiance = radiance.mul(surface->GetColor()) / 255;
@@ -136,17 +136,6 @@ Radiance Engine::RayTrace(int depth, Ray ray, float dist, Primitive *surface)
 			}
 		}
 
-/*
-
-		radiance *= surface->GetBRDF()->GetDiffusion();
-
-		if (surface->GetBRDF()->GetReflection() > 0)
-		{
-			cv::Vec3f V = -ray.GetDirection();
-			cv::Vec3f VR = 2 * surfaceNormal.dot(V) * surfaceNormal - V;
-			radiance += surface->GetBRDF()->GetReflection() * RayTrace(Ray(surfacePoint, VR), depth + 1);
-		}
-*/
 	}
 
 	return radiance;

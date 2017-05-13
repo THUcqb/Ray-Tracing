@@ -2,7 +2,7 @@
 // Created by 陈齐斌 on 04/05/2017.
 //
 
-#include "raytracer.h"
+#include "../engine/engine.h"
 #include "components.h"
 #include "scene.h"
 
