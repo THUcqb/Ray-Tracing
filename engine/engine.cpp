@@ -125,7 +125,7 @@ Radiance Engine::RayTrace(int depth, Ray ray, float dist, Primitive *surface)
 				luminaire = Hit(Ray(surfacePoint, VR), dist);
 				radiance *= 1 - surface->GetReflection();
 				Radiance t(0, 0, 0);
-				t += surface->GetReflection() * RayTrace(depth, Ray(surfacePoint, VR), dist, luminaire);
+				t += surface->GetReflection() * RayTrace(depth + 1, Ray(surfacePoint, VR), dist, luminaire);
 				if (cv::norm(t) > 255)
 					t = Radiance(255, 255, 255);
 				radiance += t;
@@ -145,59 +145,14 @@ Radiance Engine::RayTrace(int depth, Ray ray, float dist, Primitive *surface)
 	return radiance;
 }
 
-cv::Mat GradientEnergy(cv::Mat image)
-{
-	cv::cvtColor(image, image, cv::COLOR_BGR2GRAY);
-//	cv::Mat energyx, energyy;
-//	cv::Sobel(image, energyx, CV_8U, 1, 0, 3);
-//	cv::Sobel(image, energyy, CV_8U, 0, 1, 3);
-//	return cv::abs(energyx) / 2 + cv::abs(energyy) / 2;
-	cv::Mat energy(image.rows, image.cols, CV_8U);
-	for (int i = 0; i < image.rows; ++i)
-	{
-		for (int j = 0; j < image.cols; ++j)
-		{
-			int t = 0;
-			if (i - 1 >= 0)
-				t += abs(image.at<uchar>(i, j) - image.at<uchar>(i-1, j));
-			if (i + 1 < image.rows)
-				t += abs(image.at<uchar>(i, j) - image.at<uchar>(i+1, j));
-			if (j - 1 >= 0)
-				t += abs(image.at<uchar>(i, j) - image.at<uchar>(i, j-1));
-			if (j + 1 < image.cols)
-				t += abs(image.at<uchar>(i, j) - image.at<uchar>(i, j+1));
-			energy.at<uchar>(i, j)  = t / 4;
-		}
-	}
-	return energy;
-}
-
-#define C 1
-
-struct node
-{
-	int idx;
-	float value;
-	friend bool operator<(const node left, const node right)
-	{
-		return left.value < right.value || (left.value == right.value && left.idx < right.idx);
-	}
-
-	node(int idx, float value) : idx(idx), value(value)
-	{}
-};
-
 cv::Mat Engine::Render()
 {
 	InitRender();
 
 	cv::Mat colorMat(renderHeight, renderWidth, CV_8UC3);
-//	int num[renderHeight * renderWidth], sum_n = 0;
-//	memset(num, 0, sizeof(num));
 	int MONTE_CARLO_TEST = 1;
 	if (scene != nullptr)
 	{
-//		for (int idx = renderWidth * renderHeight - 1; idx >= 0; --idx)
 		for (; MONTE_CARLO_TEST < 10000; MONTE_CARLO_TEST++)
 		for (int idx = 0; idx < renderWidth * renderHeight; ++idx)
 		{
@@ -205,9 +160,6 @@ cv::Mat Engine::Render()
 			float dist = INFINITY;
 			Primitive *hit = Hit(ray, dist);
 			Radiance &&radiance = RayTrace(0, ray, dist, hit) + AMBIENT_RADIANCE;
-//			sum_n++;
-//			num[idx]++;
-//			colorMat.row(idx / renderWidth).col(idx % renderWidth) = (colorMat.row(idx / renderWidth).col(idx % renderWidth) * (num[idx] - 1) + radiance) / num[idx];
 			colorMat.row(idx / renderWidth).col(idx % renderWidth) = (colorMat.row(idx / renderWidth).col(idx % renderWidth) * (MONTE_CARLO_TEST - 1) + radiance) / MONTE_CARLO_TEST;
 
 			if (idx % renderWidth == 0)
@@ -220,55 +172,8 @@ cv::Mat Engine::Render()
 					cv::imshow("Display Window", t);
 					cv::waitKey(1);
 				}
-
-			//			std::cout << idx << std::endl;
 		}
-//		for (; MONTE_CARLO_TEST < 10000; MONTE_CARLO_TEST++)
-//		{
-//
-//			cv::Mat energy = GradientEnergy(colorMat);
-//			std::priority_queue<node> queue;
-//			for (int idx = 0; idx < renderHeight * renderWidth; ++idx)
-//			{
-//				queue.push(node(idx, energy.at<uchar>(idx / renderWidth, idx % renderWidth) + C * sqrtf(2 * logf(sum_n) / num[idx])));
-//			}
-//std::cout << MONTE_CARLO_TEST << std::endl;
-//
-//			cv::Mat show(renderHeight, renderWidth, CV_8UC3, Radiance(0, 0, 0));
-//			for (int iter = 0; iter < 5000; ++iter)
-//			{
-//				int idx = queue.top().idx;
-//				queue.pop();
-//				std::cout << idx / renderWidth << " " << idx % renderWidth << std::endl;
-//
-//				Ray &&ray = IndexToRay(idx);
-//				float dist = INFINITY;
-//				Primitive *hit = Hit(ray, dist);
-//				Radiance &&radiance = RayTrace(0, ray, dist, hit) + AMBIENT_RADIANCE;
-//				show.row(idx / renderWidth).col(idx % renderWidth) = Radiance(0, 0, 255);
-//				std::cout << show.row(idx / renderWidth).col(idx % renderWidth) << std::endl;
-//
-//				sum_n++;
-//				num[idx]++;
-//				colorMat.row(idx / renderWidth).col(idx % renderWidth) = (colorMat.row(idx / renderWidth).col(idx % renderWidth) * (num[idx] - 1) + radiance) / num[idx];
-//
-//				std::cout << idx << std::endl;
-//			}
-			//				if (idx % renderWidth == 0)
-//				{
-//			cv::Mat t;
-//			cv::resize(colorMat, t, cv::Size(renderWidth / SSAA, renderHeight / SSAA), 0, 0);
-//			for (int k = 0; k < renderWidth; k++)
-//				t.row(idx / renderWidth).col(k) = Radiance(255, 255, 255);
-//			cv::imshow("Energy", GradientEnergy(t));
-//			cv::imshow("Display Window", t);
-//			cv::imshow("Hot", show);
 
-//			cv::waitKey(1);
-//				}
-
-
-//		}
 	}
 	else
 	{
