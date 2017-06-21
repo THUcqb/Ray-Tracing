@@ -46,8 +46,12 @@ float CookTorranceBRDF::F(cv::Vec3f surfaceNormal, cv::Vec3f omega_i, cv::Vec3f 
 
 //		Cook - Torrance
 //      Rs = D(⍺, roughness) * G * ρ(theta, lambda) / (M_PI * N.dot(-L) * N.dot(V))
-		reflectance += specular * D(alpha, roughness)
-		         * G(L, N, H, V) * rho(theta, phi) / (M_PI * dot * N.dot(V));
+		double t = D(alpha, roughness)
+		          * G(L, N, H, V) * rho(theta, phi) / (M_PI * dot * N.dot(V));
+		if (t > 2)
+			reflectance += specular * 2;
+		else
+			reflectance += specular * t;
 
 	}
 	return reflectance;

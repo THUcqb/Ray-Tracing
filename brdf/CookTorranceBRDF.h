@@ -42,7 +42,7 @@ public:
 			case MIRROR:
 				return new CookTorranceBRDF(0.0, 0.9, 1.5, 0.05);
 			case METAL:
-				return new CookTorranceBRDF(0.2, 0.8, 2, 0.1);
+				return new CookTorranceBRDF(0.2, 0.5, 2, 0.2);
 		}
 	}
 

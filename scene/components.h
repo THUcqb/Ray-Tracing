@@ -40,28 +40,28 @@ public:
 	float GetPdf(const cv::Vec3f &luminairePoint, const cv::Vec3f surfacePoint) override ;
 
 	cv::Vec3f GetRandomPoint() override ;
-/*
+///*
 	int *randlist = nullptr, tt;
 
 	void initquasirand()
 	{
 		srand((unsigned int) time(0));
-		randlist = new int[MONTE_CARLO_TEST * 3];
-		for (int i = 0; i < MONTE_CARLO_TEST * 3; i++)
+		randlist = new int[WHOLE_TEST * 3];
+		for (int i = 0; i < WHOLE_TEST * 3; i++)
 			randlist[i] = rand() - RAND_MAX / 2;
 		tt = 0;
 	}
-*/
+//*/
 	int quasirand()
 	{
-		return rand() - RAND_MAX / 2;
-		/*
+//		return rand() - RAND_MAX / 2;
+//		/*
 		if (randlist == nullptr)
 			initquasirand();
-		tt %= MONTE_CARLO_TEST * 3;
-		return randlist[tt++];
-		 */
+		return randlist[(CURRENT_TEST - 1) * 3 + (tt++) % 3];
+//		 */
 	}
+
 };
 /*
 class Plane : public Primitive
@@ -112,27 +112,26 @@ public:
 	float GetPdf(const cv::Vec3f &luminairePoint, const cv::Vec3f surfacePoint) override ;
 
 	cv::Vec3f GetRandomPoint() override ;
-/*
+
 	float *randlist = nullptr;
 	int tt;
 	void initquasirand()
 	{
 		srand((unsigned int) time(0));
-		randlist = new float[MONTE_CARLO_TEST * 3];
-		for (int i = 0; i < MONTE_CARLO_TEST * 3; i++)
+		randlist = new float[WHOLE_TEST * 2];
+		for (int i = 0; i < WHOLE_TEST * 2; i++)
 			randlist[i] = (float)rand() / RAND_MAX;
 		tt = 0;
 	}
-*/
+
 	float quasirand()
 	{
-		return (float) rand() /RAND_MAX;
-		/*
+//		return (float) rand() /RAND_MAX;
+//		/*
 		if (randlist == nullptr)
 			initquasirand();
-		tt %= MONTE_CARLO_TEST * 3;
-		return randlist[tt++];
-		 */
+		return randlist[(CURRENT_TEST - 1) * 2 + (tt++) % 2];
+//		 */
 	}
 
 };

@@ -43,7 +43,7 @@ void Scene::InitScene()
 #define METAL_SURFACE CookTorranceBRDF::CreateCookTorranceBRDF(CookTorranceBRDF::METAL)
 #define MIRROR_SURFACE CookTorranceBRDF::CreateCookTorranceBRDF(CookTorranceBRDF::MIRROR)
 
-	numPrimitives = 17;
+	numPrimitives = 25;
 	primitives = new Primitive*[numPrimitives];
 
 	// ground plane
@@ -96,11 +96,38 @@ void Scene::InitScene()
 
 //	Light sources
 	primitives[15] = new Triangle("light1", LIGHT_RADIANCE,
-	                              cv::Vec3f(1, -3.99, 5), cv::Vec3f(1, -3.99, 3), cv::Vec3f(-1, -3.99, 3),
+	                              cv::Vec3f(1, -3.8, 5), cv::Vec3f(1, -3.8, 3), cv::Vec3f(-1, -3.8, 3),
 	                              DIFFUSE_SURFACE, true);
 
 	primitives[16] = new Triangle("light2", LIGHT_RADIANCE,
-	                              cv::Vec3f(1, -3.99, 5), cv::Vec3f(-1, -3.99, 3), cv::Vec3f(-1, -3.99, 5),
+	                              cv::Vec3f(1, -3.8, 5), cv::Vec3f(-1, -3.8, 3), cv::Vec3f(-1, -3.8, 5),
+	                              DIFFUSE_SURFACE, true);
+
+	primitives[17] = new Triangle("light3", LIGHT_RADIANCE,
+	                              cv::Vec3f(1, -4, 3), cv::Vec3f(-1, -4, 3), cv::Vec3f(-1, -3.8, 3),
+	                              DIFFUSE_SURFACE, true);
+	primitives[18] = new Triangle("light4", LIGHT_RADIANCE,
+	                              cv::Vec3f(1, -3.8, 3), cv::Vec3f(1, -4, 3), cv::Vec3f(-1, -3.8, 3),
+	                              DIFFUSE_SURFACE, true);
+
+	primitives[19] = new Triangle("light5", LIGHT_RADIANCE,
+	                              cv::Vec3f(1, -4, 5), cv::Vec3f(1, -3.8, 5), cv::Vec3f(-1, -4, 5),
+	                              DIFFUSE_SURFACE, true);
+	primitives[20] = new Triangle("light6", LIGHT_RADIANCE,
+	                              cv::Vec3f(1, -3.8, 5), cv::Vec3f(-1, -3.8, 5), cv::Vec3f(-1, -4, 5),
+	                              DIFFUSE_SURFACE, true);
+
+	primitives[21] = new Triangle("light7", LIGHT_RADIANCE,
+	                              cv::Vec3f(-1, -4, 3), cv::Vec3f(-1, -4, 5), cv::Vec3f(-1, -3.8, 5),
+	                              DIFFUSE_SURFACE, true);
+	primitives[22] = new Triangle("light8", LIGHT_RADIANCE,
+	                              cv::Vec3f(-1, -3.8, 3), cv::Vec3f(-1, -4, 3), cv::Vec3f(-1, -3.8, 5),
+	                              DIFFUSE_SURFACE, true);
+	primitives[23] = new Triangle("light7", LIGHT_RADIANCE,
+	                              cv::Vec3f(1, -4, 3), cv::Vec3f(1, -3.8, 5), cv::Vec3f(1, -4, 5),
+	                              DIFFUSE_SURFACE, true);
+	primitives[24] = new Triangle("light8", LIGHT_RADIANCE,
+	                              cv::Vec3f(1, -3.8, 3), cv::Vec3f(1, -3.8, 5), cv::Vec3f(1, -4, 3),
 	                              DIFFUSE_SURFACE, true);
 
 }

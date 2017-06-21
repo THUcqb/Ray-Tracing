@@ -125,10 +125,11 @@ Radiance Engine::RayTrace(int depth, Ray ray, float dist, Primitive *surface)
 				luminaire = Hit(Ray(surfacePoint, VR), dist);
 				radiance *= 1 - surface->GetReflection();
 				Radiance t(0, 0, 0);
-				t += surface->GetReflection() * RayTrace(depth + 1, Ray(surfacePoint, VR), dist, luminaire);
-				if (cv::norm(t) > 255)
-					t = Radiance(255, 255, 255);
-				radiance += t;
+				t += surface->GetReflection() * RayTrace(depth, Ray(surfacePoint, VR), dist, luminaire);
+				if (cv::norm(t) > 500)
+					radiance += t * (500 / cv::norm(t));
+				else
+					radiance += t;
 			}
 
 			radiance = radiance.mul(surface->GetColor()) / 255;
@@ -145,33 +146,42 @@ Radiance Engine::RayTrace(int depth, Ray ray, float dist, Primitive *surface)
 	return radiance;
 }
 
+int Primitive::WHOLE_TEST = 10000, Primitive::CURRENT_TEST = 1;
+
 cv::Mat Engine::Render()
 {
 	InitRender();
 
-	cv::Mat colorMat(renderHeight, renderWidth, CV_8UC3);
-	int MONTE_CARLO_TEST = 1;
+	cv::Mat colorMat(renderHeight, renderWidth, CV_8UC3, Radiance(0, 0, 0));
+	Radiance sum[renderHeight][renderWidth];
+	memset(sum, 0, sizeof(sum));
 	if (scene != nullptr)
 	{
-		for (; MONTE_CARLO_TEST < 10000; MONTE_CARLO_TEST++)
-		for (int idx = 0; idx < renderWidth * renderHeight; ++idx)
+		for (; Primitive::CURRENT_TEST < Primitive::WHOLE_TEST; Primitive::CURRENT_TEST++)
 		{
-			Ray &&ray = IndexToRay(idx);
-			float dist = INFINITY;
-			Primitive *hit = Hit(ray, dist);
-			Radiance &&radiance = RayTrace(0, ray, dist, hit) + AMBIENT_RADIANCE;
-			colorMat.row(idx / renderWidth).col(idx % renderWidth) = (colorMat.row(idx / renderWidth).col(idx % renderWidth) * (MONTE_CARLO_TEST - 1) + radiance) / MONTE_CARLO_TEST;
-
-			if (idx % renderWidth == 0)
+			cv::Mat current(renderHeight, renderWidth, CV_8UC3, Radiance(0, 0, 0));
+			for (int idx = 0; idx < renderWidth * renderHeight; ++idx)
+			{
+				Ray &&ray = IndexToRay(idx);
+				float dist = INFINITY;
+				Primitive *hit = Hit(ray, dist);
+				Radiance &&radiance = RayTrace(0, ray, dist, hit) + AMBIENT_RADIANCE;
+//			colorMat.row(idx / renderWidth).col(idx % renderWidth) = (colorMat.row(idx / renderWidth).col(idx % renderWidth) * (Primitive::CURRENT_TEST - 1) + radiance) / Primitive::CURRENT_TEST;
+				sum[idx / renderWidth][idx % renderWidth] += radiance;
+				current.row(idx / renderWidth).col(idx % renderWidth) = radiance;
+				colorMat.row(idx / renderWidth).col(idx % renderWidth) =
+						sum[idx / renderWidth][idx % renderWidth] / Primitive::CURRENT_TEST;
+				if (idx % renderWidth == 0)
 				{
 					cv::Mat t;
 					cv::resize(colorMat, t, cv::Size(renderWidth / SSAA, renderHeight / SSAA), 0, 0);
 					for (int k = 0; k < renderWidth; k++)
 						t.row(idx / renderWidth).col(k) = Radiance(255, 255, 255);
-//					cv::imshow("Energy", GradientEnergy(t));
+					cv::imshow("Current", current);
 					cv::imshow("Display Window", t);
 					cv::waitKey(1);
 				}
+			}
 		}
 
 	}

@@ -11,7 +11,7 @@
 namespace raytracer
 {
 #define AMBIENT_RADIANCE Radiance(10, 10, 10)
-#define LIGHT_RADIANCE Radiance(15000, 15000, 15000)
+#define LIGHT_RADIANCE Radiance(12000, 12000, 12000)
 #define DEFAULT_RADIANCE Radiance(0, 0, 0)
 
 typedef cv::Scalar_<int > Radiance;
@@ -44,6 +44,7 @@ private:
 	bool isLuminaire;
 	float reflection;
 public:
+	static int WHOLE_TEST, CURRENT_TEST;
 	enum Type
 	{
 		PLANE,
