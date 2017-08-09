@@ -40,51 +40,9 @@ public:
 	float GetPdf(const cv::Vec3f &luminairePoint, const cv::Vec3f surfacePoint) override ;
 
 	cv::Vec3f GetRandomPoint() override ;
-///*
-	int *randlist = nullptr, tt;
-
-	void initquasirand()
-	{
-		srand((unsigned int) time(0));
-		randlist = new int[WHOLE_TEST * 3];
-		for (int i = 0; i < WHOLE_TEST * 3; i++)
-			randlist[i] = rand() - RAND_MAX / 2;
-		tt = 0;
-	}
-//*/
-	int quasirand()
-	{
-//		return rand() - RAND_MAX / 2;
-//		/*
-		if (randlist == nullptr)
-			initquasirand();
-		return randlist[(CURRENT_TEST - 1) * 3 + (tt++) % 3];
-//		 */
-	}
 
 };
-/*
-class Plane : public Primitive
-{
-	float D;
-	cv::Vec3f normal;
 
-public:
-	Plane(const char *id, const Radiance &color,
-	      const cv::Vec3f &normal, float D,
-	      BRDF *brdf = CookTorranceBRDF::CreateCookTorranceBRDF(CookTorranceBRDF::DIFFUSE),
-	      bool isLuminaire = false)
-	:   Primitive(id, color, brdf, isLuminaire), normal(cv::normalize(normal)), D(D)
-	{}
-
-	//	Override
-	Type GetType() override { return PLANE; }
-
-	cv::Vec3f GetNormal(const cv::Vec3f &point) override { return normal; }
-
-	HitState Intersect(const Ray &ray, float &dist) override;
-};
-*/
 class Triangle : public Primitive
 {
 	cv::Vec3f a, b, c;
@@ -112,27 +70,6 @@ public:
 	float GetPdf(const cv::Vec3f &luminairePoint, const cv::Vec3f surfacePoint) override ;
 
 	cv::Vec3f GetRandomPoint() override ;
-
-	float *randlist = nullptr;
-	int tt;
-	void initquasirand()
-	{
-		srand((unsigned int) time(0));
-		randlist = new float[WHOLE_TEST * 2];
-		for (int i = 0; i < WHOLE_TEST * 2; i++)
-			randlist[i] = (float)rand() / RAND_MAX;
-		tt = 0;
-	}
-
-	float quasirand()
-	{
-//		return (float) rand() /RAND_MAX;
-//		/*
-		if (randlist == nullptr)
-			initquasirand();
-		return randlist[(CURRENT_TEST - 1) * 2 + (tt++) % 2];
-//		 */
-	}
 
 };
 }   //  namespace raytracer

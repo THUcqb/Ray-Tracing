@@ -63,6 +63,7 @@ Primitive *Engine::Hit(Ray ray, float &dist)
 
 	return hit;
 }
+#define MAX_DEPTH 2
 
 Radiance Engine::RayTrace(int depth, Ray ray, float dist, Primitive *surface)
 {
@@ -93,6 +94,7 @@ Radiance Engine::RayTrace(int depth, Ray ray, float dist, Primitive *surface)
 				if ((luminaire = scene->GetPrimitives(i)) != surface
 				    && (!directLighting || luminaire->IsLuminaire()))
 				{
+
 //					for (int test = 0; test < 1; ++test)
 //					{
 						cv::Vec3f luminairePoint = luminaire->GetRandomPoint();

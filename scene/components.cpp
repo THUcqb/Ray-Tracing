@@ -54,24 +54,9 @@ float Sphere::GetPdf(const cv::Vec3f &luminairePoint, const cv::Vec3f surfacePoi
 
 cv::Vec3f Sphere::GetRandomPoint()
 {
-	return center + radius * cv::normalize(cv::Vec3f(quasirand(), quasirand(), quasirand()));
+	return center + radius * cv::normalize(cv::Vec3f(rand() - RAND_MAX / 2, rand() - RAND_MAX / 2, rand() - RAND_MAX / 2));
 }
-/*
-HitState Plane::Intersect(const Ray &ray, float &dist)
-{
-	float dot = normal.dot(ray.GetDirection());
-	if (dot != 0)
-	{
-		float tdist = -(normal.dot(ray.GetOrigin()) + D) / dot;
-		if (tdist > 0 && tdist < dist)
-		{
-			dist = tdist;
-			return HIT;
-		}
-	}
-	return MISS;
-}
-*/
+
 HitState Triangle::Intersect(const Ray &ray, float &dist)
 {
 	float dot = normal.dot(ray.GetDirection());
@@ -102,7 +87,7 @@ float Triangle::GetPdf(const cv::Vec3f &luminairePoint, const cv::Vec3f surfaceP
 
 cv::Vec3f Triangle::GetRandomPoint()
 {
-	float x = quasirand(), y = quasirand();
+	float x = (float)rand() / RAND_MAX, y = (float)rand() / RAND_MAX;
 	if (x > y)
 		std::swap(x, y);
 	return a * x + b * (y - x) + c * (1 - y);

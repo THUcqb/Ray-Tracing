@@ -33,9 +33,6 @@ private:
 
 	Radiance RayTrace(int depth, Ray ray, float dist, Primitive *surface);
 
-#define MAX_DEPTH 1
-//	Radiance map[121][101][201][MAX_DEPTH];
-//	bool set[121][101][201][MAX_DEPTH];
 public:
 	Engine(Scene *scene);
 
